@@ -1,105 +1,117 @@
 public class Vehicle {
 
-    // Public data members
-    public String brand;
-    public String model;
-    public java.time.Year yearOfMfg;
-    public String color;
-    public char fuelType;   // E, P, D, C
-    public double price;
-    public int seatingCapacity;
+    // Public attributes
+    public String make;
+    public String variant;
+    public java.time.Year manufactureYear;
+    public String bodyColor;
+    public char fuelCategory;   // E = Electric, P = Petrol, D = Diesel, C = CNG
+    public double cost;
+    public int seatCount;
 
-    // Private members
-    private String mfgCode;
-    private int noOfServices;
+    // Private attributes
+    private String manufacturingCode;
+    private int serviceCount;
 
     // Default constructor
     public Vehicle() {
-        brand = "Toyota";
-        model = "Camry";
-        yearOfMfg = java.time.Year.of(2025);
-        color = "White";
-        fuelType = 'P';
-        seatingCapacity = 5;
-        price = 2400000;
+        make = "Skoda";
+        variant = "Octavia";
+        manufactureYear = java.time.Year.of(2026);
+        bodyColor = "Blue";
+        fuelCategory = 'P';
+        seatCount = 5;
+        cost = 2650000;
     }
 
-    // Parameterized constructor 
-    public Vehicle(String brand, String model, double price, String color) {
-        this.brand = brand;
-        this.model = model;
-        this.price = price;
-        this.color = color;
-        this.yearOfMfg = java.time.Year.of(2024);
-        this.fuelType = 'P';
-        this.seatingCapacity = 5;
+    // Parameterized constructor (basic details)
+    public Vehicle(String make, String variant, double cost, String bodyColor) {
+        this.make = make;
+        this.variant = variant;
+        this.cost = cost;
+        this.bodyColor = bodyColor;
+        this.manufactureYear = java.time.Year.of(2025);
+        this.fuelCategory = 'P';
+        this.seatCount = 5;
     }
 
-    // Parameterized constructor (fuel + manufacturing)
-    public Vehicle(char fuelType, double price, String mfgCode) {
-        this.brand = "Generic";
-        this.model = "ModelX";
-        this.yearOfMfg = java.time.Year.of(2023);
-        this.color = "Gray";
-        this.fuelType = fuelType;
-        this.price = price;
-        this.seatingCapacity = 4;
-        this.mfgCode = mfgCode;
+    // Parameterized constructor (fuel + manufacturing info)
+    public Vehicle(char fuelCategory, double cost, String manufacturingCode) {
+        this.make = "Kia";
+        this.variant = "Seltos";
+        this.manufactureYear = java.time.Year.of(2024);
+        this.bodyColor = "Black";
+        this.fuelCategory = fuelCategory;
+        this.cost = cost;
+        this.seatCount = 5;
+        this.manufacturingCode = manufacturingCode;
     }
 
     // Copy constructor
-    public Vehicle(Vehicle v) {
-        this.brand = v.brand;
-        this.model = v.model;
-        this.yearOfMfg = v.yearOfMfg;
-        this.color = v.color;
-        this.fuelType = v.fuelType;
-        this.price = v.price;
-        this.seatingCapacity = v.seatingCapacity;
-        this.mfgCode = v.mfgCode;
-        this.noOfServices = v.noOfServices;
+    public Vehicle(Vehicle other) {
+        this.make = other.make;
+        this.variant = other.variant;
+        this.manufactureYear = other.manufactureYear;
+        this.bodyColor = other.bodyColor;
+        this.fuelCategory = other.fuelCategory;
+        this.cost = other.cost;
+        this.seatCount = other.seatCount;
+        this.manufacturingCode = other.manufacturingCode;
+        this.serviceCount = other.serviceCount;
     }
 
-    // Getters & setters
-    public void setMfgCode(String code) { mfgCode = code; }
-    public String getMfgCode() { return mfgCode; }
+    // Getter & Setter methods
+    public void setManufacturingCode(String code) {
+        manufacturingCode = code;
+    }
 
-    public void setNoOfServices(int n) { noOfServices = n; }
-    public int getNoOfServices() { return noOfServices; }
+    public String getManufacturingCode() {
+        return manufacturingCode;
+    }
 
-    // Required methods
+    public void setServiceCount(int count) {
+        serviceCount = count;
+    }
+
+    public int getServiceCount() {
+        return serviceCount;
+    }
+
+    // Core vehicle behaviors
     public void start() {
-        System.out.println("Vehicle started.");
+        System.out.println("Ignition turned ON.");
     }
 
     public void drive() {
-        System.out.println("Vehicle is moving...");
+        System.out.println("Vehicle in motion.");
     }
 
     public void stop() {
-        System.out.println("Vehicle stopped.");
+        System.out.println("Ignition turned OFF.");
     }
 
-    public void changeSpeed(int newSpeed) {
-        System.out.println("Speed changed to " + newSpeed + " kmph");
+    public void changeSpeed(int speed) {
+        System.out.println("Current speed set to " + speed + " kmph");
     }
 
-    public double calcMileage(double fuelAmt, double distance) {
-        return distance / fuelAmt;
+    public double calcMileage(double fuelUsed, double distanceCovered) {
+        return distanceCovered / fuelUsed;
     }
 
-    // Tabular printer
+    // Static method for tabular output
     public static void printTabular(Vehicle v, double mileage) {
-        System.out.printf("%-10s %-10s %-6s %-8s %-5s %-5d %-10.2f %-8.2f %-10s %-5d\n",
-                v.brand,
-                v.model,
-                v.yearOfMfg,
-                v.color,
-                v.fuelType,
-                v.seatingCapacity,
-                v.price,
+        System.out.printf(
+                "%-10s %-10s %-6s %-8s %-5s %-5d %-10.2f %-8.2f %-10s %-5d%n",
+                v.make,
+                v.variant,
+                v.manufactureYear,
+                v.bodyColor,
+                v.fuelCategory,
+                v.seatCount,
+                v.cost,
                 mileage,
-                v.getMfgCode(),
-                v.getNoOfServices());
+                v.getManufacturingCode(),
+                v.getServiceCount()
+        );
     }
 }

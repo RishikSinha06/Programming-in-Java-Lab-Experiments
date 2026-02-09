@@ -2,52 +2,52 @@ public class MainForVehicle {
 
     public static void main(String[] args) {
 
-        // Create objects
-        Vehicle v = new Vehicle();
+        // Vehicle instances
+        Vehicle carA = new Vehicle();
 
-        Vehicle v1 = new Vehicle("Honda", "City", 1200000, "Silver");
-        v1.fuelType = 'D';
-        v1.setMfgCode("MH12AB1234");
+        Vehicle carB = new Vehicle("Hyundai", "Verna", 1350000, "White");
+        carB.fuelCategory = 'P';
+        carB.setManufacturingCode("TN09XY5678");
 
-        Vehicle v2 = new Vehicle('P', 2000000, "H12QWE23");
+        Vehicle carC = new Vehicle('D', 2450000, "DL8CAF9999");
 
-        // Copy constructor object
-        Vehicle v3 = new Vehicle(v1);
+        // Copy constructor
+        Vehicle carD = new Vehicle(carB);
 
-        // Array of vehicles
-        Vehicle[] garage = { v, v1, v2, v3 };
+        // Vehicle array
+        Vehicle[] parkingLot = { carA, carB, carC, carD };
 
-        // TABLE OUTPUT 
-        System.out.println("---------------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-10s %-6s %-8s %-5s %-5s %-10s %-8s %-10s %-5s\n",
-                "Brand", "Model", "Year", "Color", "Fuel", "Seats", "Price", "Mileage", "MfgCode", "Srv");
-        System.out.println("---------------------------------------------------------------------------------------------");
+        // Table header
+        System.out.println("================================================================================================");
+        System.out.printf("%-12s %-12s %-6s %-8s %-6s %-6s %-12s %-8s %-12s %-5s%n",
+                "Make", "Variant", "Year", "Color", "Fuel", "Seats", "Price", "Mileage", "MfgCode", "Srv");
+        System.out.println("================================================================================================");
 
-        for (Vehicle veh : garage) {
+        for (Vehicle current : parkingLot) {
 
-            double mileage;
+            double mileageValue;
 
-            if (veh.fuelType == 'D')
-                mileage = veh.calcMileage(50, 500);
-            else if (veh.fuelType == 'P' || veh.fuelType == 'C')
-                mileage = veh.calcMileage(40, 500);
+            if (current.fuelCategory == 'D')
+                mileageValue = current.calcMileage(55, 600);
+            else if (current.fuelCategory == 'P' || current.fuelCategory == 'C')
+                mileageValue = current.calcMileage(42, 600);
             else
-                mileage = 0;
+                mileageValue = 0;
 
-            Vehicle.printTabular(veh, mileage);
+            Vehicle.printTabular(current, mileageValue);
         }
 
-        System.out.println("---------------------------------------------------------------------------------------------\n");
+        System.out.println("================================================================================================\n");
 
-        // ACTIONS WITH VEHICLE NAME
-        for (Vehicle veh : garage) {
+        // Vehicle actions
+        for (Vehicle current : parkingLot) {
 
-            System.out.println("=== Actions for " + veh.brand + " " + veh.model + " ===");
+            System.out.println(">>> Operating vehicle: " + current.make + " " + current.variant);
 
-            veh.start();
-            veh.drive();
-            veh.changeSpeed(60);
-            veh.stop();
+            current.start();
+            current.drive();
+            current.changeSpeed(70);
+            current.stop();
 
             System.out.println();
         }
