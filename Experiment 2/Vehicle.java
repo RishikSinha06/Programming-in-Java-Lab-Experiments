@@ -1,90 +1,105 @@
 public class Vehicle {
 
     // Public data members
-    public String brandName;
-    public String modelName;
-    public float price;
-    public char fuelType;     // P = Petrol, D = Diesel, C = CNG
-    public int seats;
+    public String brand;
+    public String model;
+    public java.time.Year yearOfMfg;
+    public String color;
+    public char fuelType;   // E, P, D, C
+    public double price;
+    public int seatingCapacity;
 
-    // Private data members
+    // Private members
     private String mfgCode;
     private int noOfServices;
 
-    /* ---------- Getter & Setter Methods ---------- */
+    // Default constructor
+    public Vehicle() {
+        brand = "Toyota";
+        model = "Camry";
+        yearOfMfg = java.time.Year.of(2025);
+        color = "White";
+        fuelType = 'P';
+        seatingCapacity = 5;
+        price = 2400000;
+    }
 
-    public void setMfgCode(String mfgCode) {
+    // Parameterized constructor 
+    public Vehicle(String brand, String model, double price, String color) {
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+        this.color = color;
+        this.yearOfMfg = java.time.Year.of(2024);
+        this.fuelType = 'P';
+        this.seatingCapacity = 5;
+    }
+
+    // Parameterized constructor (fuel + manufacturing)
+    public Vehicle(char fuelType, double price, String mfgCode) {
+        this.brand = "Generic";
+        this.model = "ModelX";
+        this.yearOfMfg = java.time.Year.of(2023);
+        this.color = "Gray";
+        this.fuelType = fuelType;
+        this.price = price;
+        this.seatingCapacity = 4;
         this.mfgCode = mfgCode;
     }
 
-    public String getMfgCode() {
-        return mfgCode;
-    }
-
-    public void setNoOfServices(int noOfServices) {
-        this.noOfServices = noOfServices;
-    }
-
-    public int getNoOfServices() {
-        return noOfServices;
-    }
-
-    /* ---------- Constructors ---------- */
-
-    // 1. Default constructor
-    public Vehicle() {
-        brandName = "MG";
-        modelName = "Hector";
-        price = 115000.45f;
-        fuelType = 'P';
-        seats = 5;
-    }
-
-    // 2. Parameterized constructor
-    public Vehicle(String brandName, String modelName, float price, char fuelType) {
-        this.brandName = brandName;
-        this.modelName = modelName;
-        this.price = price;
-        this.fuelType = fuelType;
-        this.seats = 5;
-    }
-
-    // 3. Copy constructor
+    // Copy constructor
     public Vehicle(Vehicle v) {
-        this.brandName = v.brandName;
-        this.modelName = v.modelName;
-        this.price = v.price;
+        this.brand = v.brand;
+        this.model = v.model;
+        this.yearOfMfg = v.yearOfMfg;
+        this.color = v.color;
         this.fuelType = v.fuelType;
-        this.seats = v.seats;
+        this.price = v.price;
+        this.seatingCapacity = v.seatingCapacity;
+        this.mfgCode = v.mfgCode;
+        this.noOfServices = v.noOfServices;
     }
 
-    /* ---------- Methods ---------- */
+    // Getters & setters
+    public void setMfgCode(String code) { mfgCode = code; }
+    public String getMfgCode() { return mfgCode; }
 
+    public void setNoOfServices(int n) { noOfServices = n; }
+    public int getNoOfServices() { return noOfServices; }
+
+    // Required methods
     public void start() {
-        System.out.println("Start Ignition by pressing the button");
-    }
-
-    public void stop() {
-        System.out.println("Vehicle stopped");
+        System.out.println("Vehicle started.");
     }
 
     public void drive() {
-        System.out.println("Vehicle is moving");
+        System.out.println("Vehicle is moving...");
     }
 
-    public float calcMileage(float fuel, float distance) {
-        return distance / fuel;
+    public void stop() {
+        System.out.println("Vehicle stopped.");
     }
 
-    public int changeSpeed(int currentSpeed) {
-        return currentSpeed + 20;
+    public void changeSpeed(int newSpeed) {
+        System.out.println("Speed changed to " + newSpeed + " kmph");
     }
 
-    public float getMileage() {
-        if (fuelType == 'D') {
-            return calcMileage(50, 500);
-        } else {
-            return calcMileage(40, 500);
-        }
+    public double calcMileage(double fuelAmt, double distance) {
+        return distance / fuelAmt;
+    }
+
+    // Tabular printer
+    public static void printTabular(Vehicle v, double mileage) {
+        System.out.printf("%-10s %-10s %-6s %-8s %-5s %-5d %-10.2f %-8.2f %-10s %-5d\n",
+                v.brand,
+                v.model,
+                v.yearOfMfg,
+                v.color,
+                v.fuelType,
+                v.seatingCapacity,
+                v.price,
+                mileage,
+                v.getMfgCode(),
+                v.getNoOfServices());
     }
 }
